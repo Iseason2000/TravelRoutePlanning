@@ -11,10 +11,18 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     test.cpp \
+<<<<<<< HEAD
+=======
+    test.cpp \
+>>>>>>> 3bb2bb4 (“test”)
     trpmainwindow.cpp
 
 HEADERS += \
     test.h \
+<<<<<<< HEAD
+=======
+    test.h \
+>>>>>>> 3bb2bb4 (“test”)
     trpmainwindow.h
 
 FORMS += \
