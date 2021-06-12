@@ -4,7 +4,9 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class TRPMainWindow; }
+namespace Ui {
+class TRPMainWindow;
+}
 QT_END_NAMESPACE
 
 class TRPMainWindow : public QMainWindow
@@ -12,10 +14,10 @@ class TRPMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    TRPMainWindow(QWidget *parent = nullptr);
+    TRPMainWindow(QWidget* parent = nullptr);
     ~TRPMainWindow();
 
 private:
-    Ui::TRPMainWindow *ui;
+    Ui::TRPMainWindow* ui;
 };
-#endif // TRPMAINWINDOW_H
+#endif  // TRPMAINWINDOW_H
