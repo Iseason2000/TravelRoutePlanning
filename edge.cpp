@@ -1,17 +1,18 @@
-#include "edge.h"
-QSet<unsigned int> Edge::idSet = QSet<unsigned int>();  //初始化id集合
+﻿#include "edge.h"
+
+QMap<unsigned int, Edge*> Edge::idMap = QMap<unsigned int, Edge*>();  //初始化id表
+Edge::~Edge()
+{
+    idMap.remove(id);
+}
+
 Edge::Edge(QString displayName, EdgeType type, unsigned int length, float cost)
 {
     this->displayName = displayName;
     this->type        = type;
     this->length      = length;
     this->cost        = cost;
-    //为当前对象申请唯一id
-    unsigned int count = idSet.size();
-    while (idSet.contains(count)) {
-        count++;
-    }
-    idSet.insert(count);
+    setID();  //为当前对象申请唯一id
 }
 
 Edge::Edge(QString displayName, EdgeType type, unsigned int length, float cost, unsigned int id)
@@ -20,13 +21,31 @@ Edge::Edge(QString displayName, EdgeType type, unsigned int length, float cost, 
     this->type        = type;
     this->length      = length;
     this->cost        = cost;
-    if (idSet.contains(id)) {
-        throw "对象id冲突！";
+    if (idMap.contains(id)) {
+        throw "对象id冲突!";
     }
     this->id = id;
+    idMap.insert(id, this);
+}
+
+Edge* Edge::getByID(unsigned int id)
+{
+    if (idMap.contains(id))
+        return idMap[id];
+    return nullptr;
 }
 
 unsigned int Edge::getId() const
 {
     return id;
+}
+
+void Edge::setID()
+{
+    auto count = idMap.size();
+    while (idMap.contains(count)) {
+        count++;
+    }
+    idMap.insert(count, this);
+    this->id = count;
 }

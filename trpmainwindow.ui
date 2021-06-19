@@ -6,32 +6,808 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1201</width>
-    <height>707</height>
+    <width>1050</width>
+    <height>860</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TRPMainWindow</string>
+   <string> 数据结构-综合实训-出行路线规划</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>10</y>
+      <width>201</width>
+      <height>731</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="function">
+     <attribute name="title">
+      <string>功能</string>
+     </attribute>
+     <widget class="QGroupBox" name="FunctionRoad">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>181</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>路径规划</string>
+      </property>
+      <widget class="QPushButton" name="setStartButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>89</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>设置出发点</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="setEndButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>89</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>设置结束点</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="startNode">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>72</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="endNode">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>60</y>
+         <width>72</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="searchTypecomboBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>91</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>距离最短</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>时间最短</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>道路最少</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>红绿灯最少</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>花费最少</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>高速优先</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>非高速优先</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>161</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>搜索路径</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="searchTypeLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>85</y>
+         <width>72</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>搜索类型</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="walkTypeLable">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>80</y>
+         <width>71</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>出行方式</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="walkTypecomboBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>110</y>
+         <width>61</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>步行</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>驾车</string>
+        </property>
+       </item>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="AreaSearch">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>210</y>
+        <width>181</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>  范围搜索</string>
+      </property>
+      <widget class="QPushButton" name="setStartButton_area">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>设置搜索中点</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="startNode_area">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="typeLabel_area">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>84</y>
+         <width>101</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 搜索范围:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="typeComboBox_area">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>61</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>范围</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>最近</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QSpinBox" name="areaBox">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>110</y>
+         <width>61</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>99999</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="arealabel">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>110</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>米</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="typeLabel_area_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>101</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 搜索类型:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="typecomboBox_area">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>170</y>
+         <width>91</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>酒店</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>超市</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>银行</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>景点</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>美食</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>全部</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>搜索</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>200</y>
+         <width>93</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 评价最好</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="message">
+     <attribute name="title">
+      <string> 节点信息</string>
+     </attribute>
+     <widget class="QCheckBox" name="nodeAblecheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>启用</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="nodeAttribute">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>161</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>节点属性</string>
+      </property>
+      <widget class="QLabel" name="nameLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>节点名称:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="nameEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="typeLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>节点类型:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="typeBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>141</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>中间目标</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>道路端点</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>交叉路口</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>道路端点+交叉路口</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="scoreLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>174</y>
+         <width>72</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>用户评分:</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="scoreSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>170</y>
+         <width>76</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <double>10.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="posNameLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>140</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>坐标:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="posLabel">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>140</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0,0</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="trafficLigthcheck">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>93</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 红绿灯</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="nodeSaveButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>230</y>
+         <width>141</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 保存修改</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="linkedNode">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>300</y>
+        <width>161</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>节点链接</string>
+      </property>
+      <widget class="QComboBox" name="linkedcomboBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>121</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="edgeInfoLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>60</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>边信息:</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="typeBoxEdge">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>141</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>高速路</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>普通路</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLineEdit" name="nameEditEdgeEdge">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="nameLabelEdge">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>道路名称:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="typeLabelEdge">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>道路类型:</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="addEdgeButton">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>30</y>
+         <width>21</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lengthLabelEdge">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>道路长度:</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>999999</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="danwei">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>200</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>米</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="costlabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>230</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>道路花费:</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="costSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>250</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <double>20000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="danwei_2">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>250</y>
+         <width>21</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>元</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="yonduSpinBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>300</y>
+         <width>101</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <double>20000.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="yondulabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>280</y>
+         <width>72</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>拥堵系数:</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="edgeSaveButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>330</y>
+         <width>141</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 保存修改</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1201</width>
+     <width>1050</width>
      <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>打开</string>
+     <string>文件</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menu_2">
-    <property name="title">
-     <string>保存</string>
-    </property>
+    <addaction name="open"/>
+    <addaction name="new_2"/>
+    <addaction name="save"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -44,17 +820,24 @@
     </property>
    </widget>
    <addaction name="menu"/>
-   <addaction name="menu_2"/>
    <addaction name="menu_4"/>
    <addaction name="menu_3"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QDockWidget" name="dockWidget">
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents"/>
-  </widget>
+  <action name="open">
+   <property name="text">
+    <string>打开</string>
+   </property>
+  </action>
+  <action name="save">
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </action>
+  <action name="new_2">
+   <property name="text">
+    <string>新建</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

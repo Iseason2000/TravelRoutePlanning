@@ -10,7 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     edge.cpp \
-    graph.cpp \
+    graphicsview.cpp \
     main.cpp \
     map.cpp \
     node.cpp \
@@ -18,7 +18,7 @@ SOURCES += \
 
 HEADERS += \
     edge.h \
-    graph.h \
+    graphicsview.h \
     map.h \
     node.h \
     trpmainwindow.h
@@ -30,3 +30,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    icons.qrc
