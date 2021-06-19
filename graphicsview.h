@@ -11,14 +11,17 @@ class GraphicsView : public QGraphicsView
 {
 public:
     GraphicsView(QWidget* parent = nullptr);
-    void loadUI(Ui::TRPMainWindow* ui);
-    void showAttribute();      //根据当前对象读取节点属性
-    void newNode();            //新建节点
-    void deleteCurrentNode();  //删除当前节点
-    bool hasCurrentItem();     //是否有选中的节点
-
+    void  loadUI(Ui::TRPMainWindow* ui);
+    void  showAttribute();                                     //根据当前对象读取节点属性
+    void  newNode();                                           //新建节点
+    void  deleteCurrentNode();                                 //删除当前节点
+    bool  hasCurrentItem();                                    //是否有选中的节点
+    void  link(Node& fistNode, Node& secondNode, Edge& edge);  //将2个点以边链接
+    void  unlink(Node* fistNode, Node* secondNode);            //取消2个点之间的链接
     Node* getCurrentNode() const;
 
+public:
+    bool isLinking = false;  //是否正在链接点
 protected:
     void wheelEvent(QWheelEvent* event);
     //用于右键拖动视图

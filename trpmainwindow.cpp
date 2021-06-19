@@ -61,3 +61,32 @@ void TRPMainWindow::on_nodeSaveButton_clicked()
     view->showAttribute();
     view->viewport()->update();
 }
+
+void TRPMainWindow::on_addEdgeButton_clicked()
+{
+    view->isLinking = true;
+}
+
+void TRPMainWindow::on_removeEdgeButton_2_clicked()
+{
+    if (ui->linkedcomboBox->count() <= 0)
+        return;
+    auto secondNode = Node::getByName(ui->linkedcomboBox->currentText());
+    if (!secondNode)
+        return;
+    view->unlink(view->getCurrentNode(), secondNode);
+}
+
+void TRPMainWindow::on_linkedcomboBox_currentIndexChanged(const QString& arg1)
+{
+    if (arg1.isEmpty())
+        return;
+    auto node   = Node::getByName(arg1);
+    auto edgeId = view->getCurrentNode()->neighbours[node->getId()];
+    auto edge   = Edge::getByID(edgeId);
+    ui->nameEditEdge->setText(edge->displayName);
+    ui->typeBoxEdge->setCurrentIndex(edge->type);
+    ui->edgeLengthspinBox->setValue(edge->length);
+    ui->costSpinBox->setValue(edge->cost);
+    ui->yonduSpinBox->setValue(edge->Congestion);
+}

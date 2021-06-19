@@ -1,6 +1,8 @@
 ﻿#ifndef EDGE_H
 #define EDGE_H
+#include <QGraphicsLineItem>
 #include <QMap>
+#include <QPen>
 #include <QString>
 //道路
 class Edge
@@ -11,11 +13,13 @@ public:
         Highways,     //高速路
         Generalroads  //普通路
     };
-    QString      displayName;  //显示名称
-    EdgeType     type;         //道路类型
-    unsigned int length;       //长度，非负，单位米,范围0 〜 4 294 967 295
-    float        cost;         //收费，非负,单位：元
-    float        Congestion;   //拥堵系数,范围(0,1]
+    QString            displayName;     //显示名称
+    EdgeType           type;            //道路类型
+    unsigned int       length;          //长度，非负，单位米,范围0 〜 4 294 967 295
+    float              cost;            //收费，非负,单位：元
+    float              Congestion;      //拥堵系数,范围(0,1]
+    QGraphicsLineItem* line = nullptr;  //用于划线
+    static QPen        linePen;         //用于划线
 
 public:
     ~Edge();

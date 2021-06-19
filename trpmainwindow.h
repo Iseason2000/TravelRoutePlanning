@@ -26,5 +26,8 @@ private slots:
     void newMap();
     void on_nodeAblecheckBox_stateChanged(int arg1);
     void on_nodeSaveButton_clicked();
+    void on_addEdgeButton_clicked();
+    void on_removeEdgeButton_2_clicked();
+    void on_linkedcomboBox_currentIndexChanged(const QString& arg1);
 };
 #endif  // TRPMAINWINDOW_H

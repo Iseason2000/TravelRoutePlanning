@@ -17,13 +17,14 @@ public:  //变量
         CrossEnd,  //端点+交叉路口
 
     };
-    QString      displayName;              //显示名称
-    NodeType     type;                     //节点类型
-    unsigned int x, y;                     //在map中的坐标
-    bool         hasTrafficLight = false;  //是否有红绿灯,仅限交叉路口可以为true,默认为false;
-    float        score           = 5.0;    //用户评分,范围[0.0,10.0]
-    bool         isEmpty         = true;   //是否为空节点
-    bool         isSelected      = false;  //是否被选中
+    QString                          displayName;              //显示名称
+    NodeType                         type;                     //节点类型
+    unsigned int                     x, y;                     //在map中的坐标
+    bool                             hasTrafficLight = false;  //是否有红绿灯,仅限交叉路口可以为true,默认为false;
+    float                            score           = 5.0;    //用户评分,范围[0.0,10.0]
+    bool                             isEmpty         = true;   //是否为空节点
+    bool                             isSelected      = false;  //是否被选中
+    QMap<unsigned int, unsigned int> neighbours;               //使用邻接表储存映射关系.前者为节点id，后者为边id
 
 public:  //函数
     ~Node();
@@ -34,20 +35,19 @@ public:  //函数
     QImage       getIcon();                                                                     //获取图标
     void         linkWith(Node& node, Edge& edge);                                              //与点以边链接
     void         unlinkWith(Node& node);                                                        //取消与点的链接
+    bool         hasNeighbour();                                                                //是否有相连点
     static Node* getByID(unsigned int id);                                                      //以ID获取节点,不存在返回null
+    static Node* getByName(QString name);                                                       //以名称获取节点，不存在返回null
+    void         setID();                                                                       //设置唯一id
     QRectF       boundingRect() const override;
     void         paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
 private:
-    unsigned int                     id;                                               //储存当前节点唯一id(自增)
-    QMap<unsigned int, unsigned int> neighbours = QMap<unsigned int, unsigned int>();  //使用邻接表储存映射关系.前者为节点id，后者为边id
-    static QMap<unsigned int, Node*> idMap;                                            //存储所有已注册节点id
-    static QPen                      boundingPen;                                      //设置边框画笔
-    static QPen                      selectedPen;                                      //设置边框画笔
-    static QFont                     font;                                             //显示字体
-
-private:           //函数
-    void setID();  //设置唯一id
+    unsigned int                     id;           //储存当前节点唯一id(自增)
+    static QMap<unsigned int, Node*> idMap;        //存储所有已注册节点id
+    static QPen                      boundingPen;  //设置边框画笔
+    static QPen                      selectedPen;  //设置边框画笔
+    static QFont                     font;         //显示字体
 };
 
 #endif  // NODE_H

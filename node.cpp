@@ -74,10 +74,24 @@ void Node::unlinkWith(Node& node)
     neighbours.remove(node.getId());
 }
 
+bool Node::hasNeighbour()
+{
+    return !neighbours.isEmpty();
+}
+
 Node* Node::getByID(unsigned int id)
 {
     if (idMap.contains(id))
         return idMap[id];
+    return nullptr;
+}
+
+Node* Node::getByName(QString name)
+{
+    foreach (auto id, idMap) {
+        if (id->displayName == name)
+            return id;
+    }
     return nullptr;
 }
 

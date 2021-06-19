@@ -1,9 +1,12 @@
 ﻿#include "edge.h"
-
-QMap<unsigned int, Edge*> Edge::idMap = QMap<unsigned int, Edge*>();  //初始化id表
+#include <QtDebug>
+QMap<unsigned int, Edge*> Edge::idMap   = QMap<unsigned int, Edge*>();  //初始化id表
+QPen                      Edge::linePen = QPen(QColor(100, 100, 100), 4);
 Edge::~Edge()
 {
     idMap.remove(id);
+    if (line)
+        delete line;
 }
 
 Edge::Edge(QString displayName, EdgeType type, unsigned int length, float cost)
