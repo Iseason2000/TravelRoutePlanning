@@ -91,6 +91,11 @@ Node* Node::fromJsonObject(QJsonObject object)
     return node;
 }
 
+QVector<Node*> Node::getNodes()
+{
+    return Node::idMap.values().toVector();
+}
+
 unsigned int Node::getId() const
 {
     return id;

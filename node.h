@@ -34,18 +34,20 @@ public:  //函数
     Node(unsigned int x, unsigned int y);                                                       //用于构造空节点
     Node(QString displayName, NodeType type, unsigned int x, unsigned int y);                   //构造函数
     Node(QString displayName, NodeType type, unsigned int x, unsigned int y, unsigned int id);  //用于反序列化对象
-    QJsonObject  toJsonObject();                                                                //转化为Json对象,序列化
-    static Node* fromJsonObject(QJsonObject object);                                            //由json对象创建对象，反序列化
-    unsigned int getId() const;                                                                 //获取唯一id
-    QImage       getIcon();                                                                     //获取图标
-    bool         linkWith(Node* node, Edge* edge);                                              //与点以边链接
-    void         unlinkWith(Node* node);                                                        //取消与点的链接
-    bool         hasNeighbour();                                                                //是否有相连点
-    static Node* getByID(unsigned int id);                                                      //以ID获取节点,不存在返回null
-    static Node* getByName(QString name);                                                       //以名称获取节点，不存在返回null
-    static void  reSet();                                                                       //重置id
-    QRectF       boundingRect() const override;
-    void         paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
+
+    unsigned int          getId() const;                       //获取唯一id
+    QImage                getIcon();                           //获取图标
+    bool                  linkWith(Node* node, Edge* edge);    //与点以边链接
+    void                  unlinkWith(Node* node);              //取消与点的链接
+    bool                  hasNeighbour();                      //是否有相连点
+    QJsonObject           toJsonObject();                      //转化为Json对象,序列化
+    static Node*          fromJsonObject(QJsonObject object);  //由json对象创建对象，反序列化
+    static QVector<Node*> getNodes();                          //获取所有的已注册节点
+    static Node*          getByID(unsigned int id);            //以ID获取节点,不存在返回null
+    static Node*          getByName(QString name);             //以名称获取节点，不存在返回null
+    static void           reSet();                             //重置id
+    QRectF                boundingRect() const override;
+    void                  paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 
     static QMap<unsigned int, Node*> getIdMap();
 

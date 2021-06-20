@@ -63,7 +63,6 @@ void GraphicsView::newNode()
     currentNode->isSelected = true;
     scene()->addItem(currentNode);
 }
-
 void GraphicsView::deleteCurrentNode()
 {
     auto temp = new Node(currentNode->x, currentNode->y);

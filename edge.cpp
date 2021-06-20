@@ -4,6 +4,7 @@ QMap<unsigned int, Edge*> Edge::idMap         = QMap<unsigned int, Edge*>();  //
 QPen                      Edge::normalLinePen = QPen(QColor(50, 100, 250), 4);
 QPen                      Edge::highLinePen   = QPen(QColor(50, 200, 100), 4);
 QPen                      Edge::lightLinePen  = QPen(QColor(250, 50, 100), 5);
+
 Edge::~Edge()
 {
     idMap.remove(id);
@@ -29,6 +30,10 @@ Edge::Edge(QString displayName, EdgeType type, unsigned int length, float cost, 
     }
     this->id = id;
     idMap.insert(id, this);
+}
+QVector<Edge*> Edge::getEdges()
+{
+    return Edge::idMap.values().toVector();
 }
 
 void Edge::drawLine(QLineF line)
