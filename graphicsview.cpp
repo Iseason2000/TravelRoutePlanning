@@ -1,5 +1,4 @@
 ﻿#include "graphicsview.h"
-#include <QDebug>
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
     resize(800, 800);
@@ -9,7 +8,6 @@ void GraphicsView::loadUI(Ui::TRPMainWindow* ui)
 {
     this->ui = ui;
 }
-
 void GraphicsView::showAttribute()
 {
     ui->linkedcomboBox->clear();
@@ -55,16 +53,27 @@ void GraphicsView::showAttribute()
 
 void GraphicsView::newNode()
 {
-    currentNode->isEmpty = false;
-    currentNode->setID();
-    currentNode->displayName = QString::fromLocal8Bit("新节点") + QString::number(currentNode->getId());
-    currentNode->type        = Node::NodeType::Mid;
+    auto newNode = new Node(QString::fromLocal8Bit("新节点"), Node::NodeType::Mid, currentNode->x, currentNode->y);
+    newNode->displayName += QString::number(newNode->getId());
+    auto pos = currentNode->pos();
+    scene()->removeItem(currentNode);
+    delete currentNode;
+    currentNode = newNode;
+    currentNode->setPos(pos);
+    currentNode->isSelected = true;
+    scene()->addItem(currentNode);
 }
 
 void GraphicsView::deleteCurrentNode()
 {
-    currentNode->isEmpty     = true;
-    currentNode->displayName = "";
+    auto temp = new Node(currentNode->x, currentNode->y);
+    auto pos  = currentNode->pos();
+    scene()->removeItem(currentNode);
+    delete currentNode;
+    currentNode = temp;
+    currentNode->setPos(pos);
+    currentNode->isSelected = true;
+    scene()->addItem(currentNode);
 }
 
 bool GraphicsView::hasCurrentItem()
@@ -74,14 +83,21 @@ bool GraphicsView::hasCurrentItem()
 
 void GraphicsView::link(Node* fistNode, Node* secondNode, Edge* edge)
 {
-    fistNode->linkWith(secondNode, edge);
-    secondNode->linkWith(fistNode, edge);
-    edge->setPen(Edge::normalLinePen);
-    edge->setLine(QLineF(fistNode->pos() + QPointF(25, 25), secondNode->pos() + QPointF(25, 25)));
+    if (!fistNode->linkWith(secondNode, edge))
+        return;
+    if (!secondNode->linkWith(fistNode, edge))
+        return;
+    edge->drawLine(QLineF(fistNode->pos() + QPointF(25, 25), secondNode->pos() + QPointF(25, 25)));
     scene()->addItem(edge);
     edge->stackBefore(secondNode);
     edge->stackBefore(fistNode);
     showAttribute();
+}
+
+void GraphicsView::link(Node* fistNode, Node* secondNode)
+{
+    Edge* edge = new Edge(QString::fromLocal8Bit("新道路"), Edge::EdgeType::Generalroads, 100, 10);
+    link(fistNode, secondNode, edge);
 }
 
 void GraphicsView::unlink(Node* fistNode, Node* secondNode)
@@ -129,8 +145,7 @@ void GraphicsView::mousePressEvent(QMouseEvent* event)
             currentNode = dynamic_cast<Node*>(item);  //失败时为null
         if (currentNode) {
             if (isLinking && temp && !currentNode->isEmpty) {
-                Edge* edge = new Edge(QString::fromLocal8Bit("新道路"), Edge::EdgeType::Generalroads, 100, 10);
-                link(temp, currentNode, edge);
+                link(temp, currentNode);
                 currentNode = temp;
                 isLinking   = false;
             }

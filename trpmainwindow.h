@@ -23,7 +23,9 @@ private:
     Map*               map = nullptr;
     GraphicsView*      view;
 private slots:
-    void newMap();  //新地图
+    void newMap();   //新地图
+    void saveMap();  //保存地图
+    void openMap();  //打开地图
     void on_nodeAblecheckBox_stateChanged(int arg1);
     void on_nodeSaveButton_clicked();
     void on_addEdgeButton_clicked();

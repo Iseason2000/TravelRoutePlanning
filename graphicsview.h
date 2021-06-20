@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QWheelEvent>
+#include <QtDebug>
 #include "node.h"
 #include "ui_trpmainwindow.h"
 class GraphicsView : public QGraphicsView
@@ -17,6 +18,7 @@ public:
     void  deleteCurrentNode();                                 //删除当前节点
     bool  hasCurrentItem();                                    //是否有选中的节点
     void  link(Node* fistNode, Node* secondNode, Edge* edge);  //将2个点以边链接
+    void  link(Node* fistNode, Node* secondNode);              //将2个点以默认边链接
     void  unlink(Node* fistNode, Node* secondNode);            //取消2个点之间的链接
     Node* getCurrentNode() const;
 

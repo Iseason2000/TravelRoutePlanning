@@ -4,7 +4,7 @@
 #include <QVector>
 #include "edge.h"
 #include "node.h"
-class Map  //储存地图信息
+class Map : public QObject  //储存地图信息
 {
 public:
     enum PathSearchType  //路径搜索的类型
@@ -29,16 +29,15 @@ public:
     };
     Map(unsigned int x, unsigned int y, QGraphicsView* graphicsView);
     void          initMap();                                                             //初始化地图
-    static void   link(Node& fistNode, Node& secondNode, Edge& edge);                    //将2个点以边链接
-    static void   unlink(Node& fistNode, Node& secondNode);                              //取消2个点之间的链接
     QVector<Node> PathSearch(Node& start, Node& end, PathSearchType type);               //求两点最短路径，返回节点列表
     QVector<Node> roundSearch(Node& center, unsigned int radius, RoundSearchType type);  //范围搜索,默认按评价高低排序，返回节点列表
+
+    unsigned int getX() const;
+    unsigned int getY() const;
 
 private:
     unsigned int   x;                       //地图x尺寸
     unsigned int   y;                       //地图y尺寸
-    QVector<Node>  nodes;                   //储存所有节点
-    QVector<Edge>  edges;                   //储存所有边
     QGraphicsView* graphicsView = nullptr;  //储存地图显示对象
 };
 

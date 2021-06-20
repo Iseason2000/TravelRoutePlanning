@@ -4,8 +4,6 @@
 #include <QPushButton>
 Map::Map(unsigned int x, unsigned int y, QGraphicsView* graphicsView)
 {
-    nodes              = QVector<Node>();
-    edges              = QVector<Edge>();
     this->x            = x;
     this->y            = y;
     this->graphicsView = graphicsView;
@@ -25,14 +23,12 @@ void Map::initMap()
     graphicsView->update();
 }
 
-// void Map::link(Node& fistNode, Node& secondNode, Edge& edge)
-//{
-//    fistNode.linkWith(secondNode, edge);
-//    secondNode.linkWith(fistNode, edge);
-//}
+unsigned int Map::getX() const
+{
+    return x;
+}
 
-// void Map::unlink(Node& fistNode, Node& secondNode)
-//{
-//    fistNode.unlinkWith(secondNode);
-//    secondNode.unlinkWith(fistNode);
-//}
+unsigned int Map::getY() const
+{
+    return y;
+}
