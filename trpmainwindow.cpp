@@ -104,4 +104,6 @@ void TRPMainWindow::on_edgeSaveButton_clicked()
     edge->length      = ui->edgeLengthspinBox->value();
     edge->cost        = ui->costSpinBox->value();
     edge->Congestion  = ui->yonduSpinBox->value();
+    view->showAttribute();
+    view->viewport()->update();
 }

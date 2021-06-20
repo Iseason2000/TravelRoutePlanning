@@ -1,7 +1,10 @@
 ﻿#include "edge.h"
+#include <QPainter>
 #include <QtDebug>
-QMap<unsigned int, Edge*> Edge::idMap   = QMap<unsigned int, Edge*>();  //初始化id表
-QPen                      Edge::linePen = QPen(QColor(100, 100, 100), 4);
+QMap<unsigned int, Edge*> Edge::idMap         = QMap<unsigned int, Edge*>();  //初始化id表
+QPen                      Edge::normalLinePen = QPen(QColor(50, 100, 250), 4);
+QPen                      Edge::highLinePen   = QPen(QColor(50, 200, 100), 4);
+QPen                      Edge::lightLinePen  = QPen(QColor(250, 50, 100), 5);
 Edge::~Edge()
 {
     idMap.remove(id);
@@ -48,6 +51,15 @@ QRectF Edge::boundingRect() const
 
 void Edge::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
+    if (isLighting)
+        setPen(Edge::lightLinePen);
+    else {
+        if (type == Highways) {
+            setPen(Edge::highLinePen);
+        } else {
+            setPen(Edge::normalLinePen);
+        }
+    }
     QGraphicsLineItem::paint(painter, option, widget);
 }
 

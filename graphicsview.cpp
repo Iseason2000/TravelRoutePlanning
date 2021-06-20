@@ -76,7 +76,7 @@ void GraphicsView::link(Node* fistNode, Node* secondNode, Edge* edge)
 {
     fistNode->linkWith(secondNode, edge);
     secondNode->linkWith(fistNode, edge);
-    edge->setPen(Edge::linePen);
+    edge->setPen(Edge::normalLinePen);
     edge->setLine(QLineF(fistNode->pos() + QPointF(25, 25), secondNode->pos() + QPointF(25, 25)));
     scene()->addItem(edge);
     edge->stackBefore(secondNode);
