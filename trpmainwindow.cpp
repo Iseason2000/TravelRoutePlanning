@@ -1,5 +1,6 @@
-#include "trpmainwindow.h"
+﻿#include "trpmainwindow.h"
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QMessageBox>
@@ -23,6 +24,12 @@ TRPMainWindow::~TRPMainWindow()
 
 void TRPMainWindow::newMap()
 {
+    bool    ok;
+    QString size = QInputDialog::getText(this, QString::fromLocal8Bit("新建地图"), QString::fromLocal8Bit("请大图大小：x,y"), QLineEdit::Normal, 0, &ok);
+    if (!ok || size.isEmpty()) {
+        return;
+    }
+    auto sizes = size.split(",");
     if (this->view) {
         delete this->view;
         this->view = nullptr;
@@ -35,7 +42,7 @@ void TRPMainWindow::newMap()
         delete this->map;
         this->map = nullptr;
     }
-    this->map = new Map(20, 20, view);
+    this->map = new Map(sizes[0].toInt(), sizes[1].toInt(), view);
     map->initMap();
     Node::reSet();
     Edge::reSet();
@@ -72,7 +79,7 @@ void TRPMainWindow::saveMap()
     } else {
         filename.write(json);
     }
-    QMessageBox::information(this, "保存文件", "保存文件成功!", QMessageBox::Ok);
+    QMessageBox::information(this, QString::fromLocal8Bit("保存文件"), QString::fromLocal8Bit("保存文件成功!"), QMessageBox::Ok);
     filename.close();
 }
 
