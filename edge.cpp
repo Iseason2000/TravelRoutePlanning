@@ -5,8 +5,6 @@ QPen                      Edge::linePen = QPen(QColor(100, 100, 100), 4);
 Edge::~Edge()
 {
     idMap.remove(id);
-    if (line)
-        delete line;
 }
 
 Edge::Edge(QString displayName, EdgeType type, unsigned int length, float cost)
@@ -41,6 +39,16 @@ Edge* Edge::getByID(unsigned int id)
 unsigned int Edge::getId() const
 {
     return id;
+}
+
+QRectF Edge::boundingRect() const
+{
+    return QGraphicsLineItem::boundingRect();
+}
+
+void Edge::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+    QGraphicsLineItem::paint(painter, option, widget);
 }
 
 void Edge::setID()

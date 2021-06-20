@@ -25,14 +25,14 @@ void Map::initMap()
     graphicsView->update();
 }
 
-void Map::link(Node& fistNode, Node& secondNode, Edge& edge)
-{
-    fistNode.linkWith(secondNode, edge);
-    secondNode.linkWith(fistNode, edge);
-}
+// void Map::link(Node& fistNode, Node& secondNode, Edge& edge)
+//{
+//    fistNode.linkWith(secondNode, edge);
+//    secondNode.linkWith(fistNode, edge);
+//}
 
-void Map::unlink(Node& fistNode, Node& secondNode)
-{
-    fistNode.unlinkWith(secondNode);
-    secondNode.unlinkWith(fistNode);
-}
+// void Map::unlink(Node& fistNode, Node& secondNode)
+//{
+//    fistNode.unlinkWith(secondNode);
+//    secondNode.unlinkWith(fistNode);
+//}

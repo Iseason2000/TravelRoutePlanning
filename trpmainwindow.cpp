@@ -90,3 +90,18 @@ void TRPMainWindow::on_linkedcomboBox_currentIndexChanged(const QString& arg1)
     ui->costSpinBox->setValue(edge->cost);
     ui->yonduSpinBox->setValue(edge->Congestion);
 }
+
+void TRPMainWindow::on_edgeSaveButton_clicked()
+{
+    auto name = ui->linkedcomboBox->currentText();
+    if (name.isEmpty())
+        return;
+    auto node         = Node::getByName(name);
+    auto edgeId       = view->getCurrentNode()->neighbours[node->getId()];
+    auto edge         = Edge::getByID(edgeId);
+    edge->displayName = ui->nameEditEdge->text();
+    edge->type        = Edge::EdgeType(ui->typeBoxEdge->currentIndex());
+    edge->length      = ui->edgeLengthspinBox->value();
+    edge->cost        = ui->costSpinBox->value();
+    edge->Congestion  = ui->yonduSpinBox->value();
+}

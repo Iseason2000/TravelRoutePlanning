@@ -41,7 +41,7 @@ void GraphicsView::showAttribute()
         ui->EdgeInfo->setDisabled(false);
         auto neighbours = currentNode->neighbours;
         ui->linkedcomboBox->clear();
-        for (auto id : neighbours) {
+        foreach (auto id, neighbours.keys()) {
             ui->linkedcomboBox->addItem(Node::getByID(id)->displayName);
         }
     } else {
@@ -72,27 +72,30 @@ bool GraphicsView::hasCurrentItem()
     return currentNode != nullptr;
 }
 
-void GraphicsView::link(Node& fistNode, Node& secondNode, Edge& edge)
+void GraphicsView::link(Node* fistNode, Node* secondNode, Edge* edge)
 {
-    fistNode.linkWith(secondNode, edge);
-    secondNode.linkWith(fistNode, edge);
-    edge.line = new QGraphicsLineItem();
-    edge.line->setPen(Edge::linePen);
-    edge.line->setLine(QLineF(fistNode.pos() + QPointF(25, 25), secondNode.pos() + QPointF(25, 25)));
-    scene()->addItem(edge.line);
-    edge.line->stackBefore(&secondNode);
-    edge.line->stackBefore(&fistNode);
+    fistNode->linkWith(secondNode, edge);
+    secondNode->linkWith(fistNode, edge);
+    edge->setPen(Edge::linePen);
+    edge->setLine(QLineF(fistNode->pos() + QPointF(25, 25), secondNode->pos() + QPointF(25, 25)));
+    scene()->addItem(edge);
+    edge->stackBefore(secondNode);
+    edge->stackBefore(fistNode);
     showAttribute();
 }
 
 void GraphicsView::unlink(Node* fistNode, Node* secondNode)
 {
+    if (!fistNode || !secondNode)
+        return;
+    if (!fistNode->neighbours.contains(secondNode->getId()))
+        return;
     auto edgeId = fistNode->neighbours[secondNode->getId()];
     auto edge   = Edge::getByID(edgeId);
-    scene()->removeItem(edge->line);
+    scene()->removeItem(edge);
     delete edge;
-    fistNode->unlinkWith(*secondNode);
-    secondNode->unlinkWith(*fistNode);
+    fistNode->unlinkWith(secondNode);
+    secondNode->unlinkWith(fistNode);
     showAttribute();
     viewport()->update();
 }
@@ -127,7 +130,7 @@ void GraphicsView::mousePressEvent(QMouseEvent* event)
         if (currentNode) {
             if (isLinking && temp && !currentNode->isEmpty) {
                 Edge* edge = new Edge(QString::fromLocal8Bit("新道路"), Edge::EdgeType::Generalroads, 100, 10);
-                link(*temp, *currentNode, *edge);
+                link(temp, currentNode, edge);
                 currentNode = temp;
                 isLinking   = false;
             }

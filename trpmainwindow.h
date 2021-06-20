@@ -23,11 +23,12 @@ private:
     Map*               map = nullptr;
     GraphicsView*      view;
 private slots:
-    void newMap();
+    void newMap();  //新地图
     void on_nodeAblecheckBox_stateChanged(int arg1);
     void on_nodeSaveButton_clicked();
     void on_addEdgeButton_clicked();
     void on_removeEdgeButton_2_clicked();
     void on_linkedcomboBox_currentIndexChanged(const QString& arg1);
+    void on_edgeSaveButton_clicked();
 };
 #endif  // TRPMAINWINDOW_H

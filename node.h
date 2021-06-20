@@ -33,8 +33,8 @@ public:  //函数
     Node(QString displayName, NodeType type, unsigned int x, unsigned int y, unsigned int id);  //用于反序列化对象
     unsigned int getId() const;                                                                 //获取唯一id
     QImage       getIcon();                                                                     //获取图标
-    void         linkWith(Node& node, Edge& edge);                                              //与点以边链接
-    void         unlinkWith(Node& node);                                                        //取消与点的链接
+    void         linkWith(Node* node, Edge* edge);                                              //与点以边链接
+    void         unlinkWith(Node* node);                                                        //取消与点的链接
     bool         hasNeighbour();                                                                //是否有相连点
     static Node* getByID(unsigned int id);                                                      //以ID获取节点,不存在返回null
     static Node* getByName(QString name);                                                       //以名称获取节点，不存在返回null

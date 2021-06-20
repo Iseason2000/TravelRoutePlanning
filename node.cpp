@@ -1,4 +1,5 @@
 #include "node.h"
+#include <QtDebug>
 QMap<unsigned int, Node*> Node::idMap       = QMap<unsigned int, Node*>();  //初始化id表
 QPen                      Node::boundingPen = QPen(QColor(180, 180, 180));
 QPen                      Node::selectedPen = QPen(QColor(200, 40, 40), 4);
@@ -64,14 +65,14 @@ QImage Node::getIcon()
     return QImage("://icons/crossmid.png");
 }
 
-void Node::linkWith(Node& node, Edge& edge)
+void Node::linkWith(Node* node, Edge* edge)
 {
-    neighbours.insert(node.getId(), edge.getId());
+    neighbours.insert(node->getId(), edge->getId());
 }
 
-void Node::unlinkWith(Node& node)
+void Node::unlinkWith(Node* node)
 {
-    neighbours.remove(node.getId());
+    neighbours.remove(node->getId());
 }
 
 bool Node::hasNeighbour()
