@@ -115,6 +115,31 @@ void GraphicsView::unlink(Node* fistNode, Node* secondNode)
     viewport()->update();
 }
 
+void GraphicsView::hightLightPath(bool isHightLight)
+{
+    if (!currentResult || currentResult->isEmpty())
+        return;
+    auto size = currentResult->size();
+    if (size < 2)
+        return;
+    qDebug() << size;
+    for (int n = 0; n < size; n++) {
+        auto node1       = currentResult->at(n);
+        auto node2       = currentResult->at(n) + 1;
+        auto edge        = node1->getLinkedEdge(node2);
+        edge->isLighting = isHightLight;
+    }
+}
+
+void GraphicsView::hightLightNode(bool isHightLight)
+{
+    if (!currentResult || currentResult->isEmpty())
+        return;
+    for (auto node : *currentResult) {
+        node->isMarked = isHightLight;
+    }
+}
+
 void GraphicsView::wheelEvent(QWheelEvent* event)
 {
     qreal s = event->angleDelta().y() < 0 ? 0.95 : 1.053;
@@ -143,6 +168,16 @@ void GraphicsView::mousePressEvent(QMouseEvent* event)
         else
             currentNode = dynamic_cast<Node*>(item);  //失败时为null
         if (currentNode) {
+            if (isMark1) {
+                currentNode->isMarked = true;
+                mark1                 = currentNode;
+                isMark1               = false;
+            }
+            if (isMark2) {
+                currentNode->isMarked = true;
+                mark2                 = currentNode;
+                isMark2               = false;
+            }
             if (isLinking && temp && !currentNode->isEmpty) {
                 link(temp, currentNode);
                 currentNode = temp;

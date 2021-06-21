@@ -23,6 +23,23 @@ void Map::initMap()
     graphicsView->update();
 }
 
+QVector<Node*> Map::PathSearch(Node* start, Node* end, Map::PathSearchType type, bool isWalking)
+{
+    return QVector<Node*>();
+}
+
+QVector<Node*> Map::roundSearch(Node* center, unsigned int radius, RoundSearchType type, bool isNearest, bool isBestScore)
+{
+    // center :中心点
+    // radius :搜索半径
+    // type :搜索的节点类型,在节点名称中查找，比如“酒店”类型 搜索所有名字中带有“酒店”的节点
+    // isNearest :是否最近，如果为true，则显示距离最近的节点
+    // isBestScore ：是否评分最好，如果为true，则显示评分最好的节点
+    // isNearest与isBestScore不能同时为true，但可以同时为false
+
+    return QVector<Node*>();
+}
+
 unsigned int Map::getX() const
 {
     return x;

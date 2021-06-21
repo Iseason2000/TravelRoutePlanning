@@ -4,6 +4,6 @@
         <file>icons/crossmid.png</file>
         <file>icons/end.png</file>
         <file>icons/mid.png</file>
-        <file>icons/now.png</file>
+        <file>icons/postion.png</file>
     </qresource>
 </RCC>

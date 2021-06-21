@@ -26,6 +26,7 @@ public:  //变量
     float        score           = 5.0;    //用户评分,范围[0.0,10.0]
     bool         isEmpty         = true;   //是否为空节点
     bool         isSelected      = false;  //是否被选中
+    bool         isMarked        = false;
 
     QMap<unsigned int, unsigned int> neighbours;  //使用邻接表储存映射关系.前者为节点id，后者为边id
 
@@ -40,6 +41,7 @@ public:  //函数
     bool                  linkWith(Node* node, Edge* edge);    //与点以边链接
     void                  unlinkWith(Node* node);              //取消与点的链接
     bool                  hasNeighbour();                      //是否有相连点
+    Edge*                 getLinkedEdge(Node* node);           //获取相连节点对应的边，没有相连返回nullptr
     QJsonObject           toJsonObject();                      //转化为Json对象,序列化
     static Node*          fromJsonObject(QJsonObject object);  //由json对象创建对象，反序列化
     static QVector<Node*> getNodes();                          //获取所有的已注册节点

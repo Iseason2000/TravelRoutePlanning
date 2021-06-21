@@ -130,6 +130,17 @@ bool Node::hasNeighbour()
     return !neighbours.isEmpty();
 }
 
+Edge* Node::getLinkedEdge(Node* node)
+{
+    if (!node)
+        return nullptr;
+    auto nodeId = node->getId();
+    if (!this->neighbours.contains(nodeId))
+        return nullptr;
+    auto edgeId = neighbours[nodeId];
+    return Edge::getByID(edgeId);
+}
+
 Node* Node::getByID(unsigned int id)
 {
     if (idMap.contains(id))
@@ -169,7 +180,10 @@ void Node::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
     if (isEmpty)
         return;
     painter->setFont(font);
-    painter->drawImage(boundingRect(), getIcon());
+    auto bounding = boundingRect();
+    painter->drawImage(bounding, getIcon());
+    if (isMarked)
+        painter->drawImage(QRectF(0, -22, 50, 50), QImage("://icons/postion.png"));
     painter->drawText(5, 40, displayName);
 }
 

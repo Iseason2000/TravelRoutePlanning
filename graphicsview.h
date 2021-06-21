@@ -20,16 +20,26 @@ public:
     void  link(Node* fistNode, Node* secondNode, Edge* edge);  //将2个点以边链接
     void  link(Node* fistNode, Node* secondNode);              //将2个点以默认边链接
     void  unlink(Node* fistNode, Node* secondNode);            //取消2个点之间的链接
+    void  hightLightPath(bool isHightLight);                   //高亮当前搜索结果对应的路
+    void  hightLightNode(bool isHightLight);                   //高亮当前搜索结果对应的节点
     Node* getCurrentNode() const;
+    Node* mark1 = nullptr;
+    Node* mark2 = nullptr;
 
 public:
-    bool isLinking = false;  //是否正在链接点
+    bool            isLinking     = false;    //是否正在链接点
+    bool            isMark1       = false;    //标记点1
+    bool            isMark2       = false;    //标记点2
+    QVector<Node*>* currentResult = nullptr;  //储存当前结果
+
 protected:
     void wheelEvent(QWheelEvent* event);
     //用于右键拖动视图
     void mouseMoveEvent(QMouseEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+
+private slots:
 
 private:
     Node*              currentNode = nullptr;  //储存当前选中物品

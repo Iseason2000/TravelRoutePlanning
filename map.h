@@ -28,9 +28,10 @@ public:
 
     };
     Map(unsigned int x, unsigned int y, QGraphicsView* graphicsView);
-    void          initMap();                                                             //初始化地图
-    QVector<Node> PathSearch(Node& start, Node& end, PathSearchType type);               //求两点最短路径，返回节点列表
-    QVector<Node> roundSearch(Node& center, unsigned int radius, RoundSearchType type);  //范围搜索,默认按评价高低排序，返回节点列表
+    void           initMap();                                                                //初始化地图
+    QVector<Node*> PathSearch(Node* start, Node* end, PathSearchType type, bool isWalking);  //求两点最短路径，返回节点列表
+    QVector<Node*> roundSearch(Node* center, unsigned int radius, RoundSearchType type, bool isNearest,
+                               bool isBestScore);  //范围搜索,默认按评价高低排序，返回节点列表
 
     unsigned int getX() const;
     unsigned int getY() const;

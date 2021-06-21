@@ -205,7 +205,7 @@
         <x>10</x>
         <y>210</y>
         <width>181</width>
-        <height>291</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="title">
@@ -224,24 +224,11 @@
         <string>设置搜索中点</string>
        </property>
       </widget>
-      <widget class="QLabel" name="startNode_area">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>141</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
       <widget class="QLabel" name="typeLabel_area">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>84</y>
+         <y>60</y>
          <width>101</width>
          <height>21</height>
         </rect>
@@ -250,31 +237,11 @@
         <string> 搜索范围:</string>
        </property>
       </widget>
-      <widget class="QComboBox" name="typeComboBox_area">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>61</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <item>
-        <property name="text">
-         <string>范围</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>最近</string>
-        </property>
-       </item>
-      </widget>
       <widget class="QSpinBox" name="areaBox">
        <property name="geometry">
         <rect>
          <x>90</x>
-         <y>110</y>
+         <y>60</y>
          <width>61</width>
          <height>24</height>
         </rect>
@@ -286,8 +253,8 @@
       <widget class="QLabel" name="arealabel">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>110</y>
+         <x>150</x>
+         <y>60</y>
          <width>21</width>
          <height>21</height>
         </rect>
@@ -300,7 +267,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>140</y>
+         <y>90</y>
          <width>101</width>
          <height>21</height>
         </rect>
@@ -313,7 +280,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>170</y>
+         <y>110</y>
          <width>91</width>
          <height>23</height>
         </rect>
@@ -345,7 +312,7 @@
        </item>
        <item>
         <property name="text">
-         <string>全部</string>
+         <string>其他</string>
         </property>
        </item>
       </widget>
@@ -353,7 +320,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>240</y>
+         <y>220</y>
          <width>141</width>
          <height>31</height>
         </rect>
@@ -362,17 +329,49 @@
         <string>搜索</string>
        </property>
       </widget>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>170</y>
+         <width>117</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 距离最近</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>190</y>
+         <width>117</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string> 评分最好</string>
+       </property>
+      </widget>
       <widget class="QCheckBox" name="checkBox">
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>200</y>
+         <y>140</y>
          <width>93</width>
          <height>21</height>
         </rect>
        </property>
        <property name="text">
-        <string> 评价最好</string>
+        <string> 限制</string>
        </property>
       </widget>
      </widget>
@@ -382,6 +381,9 @@
       <string> 节点信息</string>
      </attribute>
      <widget class="QCheckBox" name="nodeAblecheckBox">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -822,10 +824,11 @@
     <addaction name="new_2"/>
     <addaction name="save"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
+   <widget class="QMenu" name="login">
     <property name="title">
-     <string>登录</string>
+     <string>后台</string>
     </property>
+    <addaction name="actionlogin"/>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
@@ -834,7 +837,7 @@
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_4"/>
-   <addaction name="menu_3"/>
+   <addaction name="login"/>
   </widget>
   <action name="open">
    <property name="text">
@@ -849,6 +852,11 @@
   <action name="new_2">
    <property name="text">
     <string>新建</string>
+   </property>
+  </action>
+  <action name="actionlogin">
+   <property name="text">
+    <string> 登录</string>
    </property>
   </action>
  </widget>
