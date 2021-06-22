@@ -52,6 +52,8 @@ float Edge::getWeight(int searchType, bool isWalking)
                 return length;
             } else {
                 float speed;
+                if (congestion <= 0)
+                    congestion = 0.05;
                 if (type == Highways) {
                     speed = 120 * congestion;
                 } else {

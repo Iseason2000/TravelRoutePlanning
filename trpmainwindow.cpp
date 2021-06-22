@@ -4,6 +4,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QMessageBox>
+#include <QRandomGenerator>
 #include <QtDebug>
 #include "ui_trpmainwindow.h"
 TRPMainWindow::TRPMainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::TRPMainWindow)
@@ -341,5 +342,15 @@ void TRPMainWindow::on_checkBox_stateChanged(int arg1)
     } else {
         ui->radioButton->setDisabled(false);
         ui->radioButton_2->setDisabled(false);
+    }
+}
+
+void TRPMainWindow::on_randomButton_clicked()
+{
+    if (!view)
+        return;
+    auto edges = Edge::getEdges();
+    foreach (auto edge, edges) {
+        edge->congestion = QRandomGenerator::global()->bounded(1.0);
     }
 }

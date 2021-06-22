@@ -127,7 +127,6 @@ void GraphicsView::hightLightPath(bool isHightLight)
         auto node2       = currentResult->at(n + 1);
         auto edge        = node1->getLinkedEdge(node2);
         edge->isLighting = isHightLight;
-        qDebug() << edge->isLighting;
     }
     if (!isHightLight) {
         delete currentResult;
@@ -175,11 +174,13 @@ void GraphicsView::mousePressEvent(QMouseEvent* event)
                 currentNode->isMarked = true;
                 mark1                 = currentNode;
                 isMark1               = false;
+                ui->startNode->setText(mark1->displayName);
             }
             if (isMark2) {
                 currentNode->isMarked = true;
                 mark2                 = currentNode;
                 isMark2               = false;
+                ui->endNode->setText(mark2->displayName);
             }
             if (isLinking && temp && !currentNode->isEmpty) {
                 link(temp, currentNode);

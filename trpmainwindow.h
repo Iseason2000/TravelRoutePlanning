@@ -40,5 +40,6 @@ private slots:
     void on_setStartButton_area_clicked();
     void on_pushButton_2_clicked();
     void on_checkBox_stateChanged(int arg1);
+    void on_randomButton_clicked();
 };
 #endif  // TRPMAINWINDOW_H
