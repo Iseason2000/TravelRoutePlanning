@@ -296,10 +296,11 @@ void TRPMainWindow::on_pushButton_clicked()
     if (moveType == 0 && pathSearchType > 3) {
         QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("步行方式不支持该查询范围！"), QMessageBox::Yes, QMessageBox::Yes);
     }
-    auto result = map->PathSearch(view->mark1, view->mark2, pathSearchType, !moveType);
     view->hightLightPath(false);
-    view->currentResult = &result;
+    auto result         = map->PathSearch(view->mark1, view->mark2, pathSearchType, !moveType);
+    view->currentResult = result;
     view->hightLightPath(true);
+    view->viewport()->update();
 }
 
 void TRPMainWindow::on_setStartButton_area_clicked()

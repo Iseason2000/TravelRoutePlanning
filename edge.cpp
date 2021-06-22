@@ -41,6 +41,43 @@ void Edge::drawLine(QLineF line)
     this->line = line;
 }
 
+float Edge::getWeight(int searchType, bool isWalking)
+{
+    switch (searchType) {
+        case 0: {
+            return length;
+        }
+        case 1: {
+            if (isWalking) {
+                return length;
+            } else {
+                float speed;
+                if (type == Highways) {
+                    speed = 120 * congestion;
+                } else {
+                    speed = 40 * congestion;
+                }
+                return length / speed;
+            }
+        }
+        case 2: {
+            return 1;
+        }
+        case 3: {
+            return 0;  //红绿灯不能判断
+        }
+        case 4: {
+            return cost;
+        }
+        case 5: {
+            return (int)(type != Highways);  // 为高速时返回0 否则1
+        }
+        default: {
+            return (int)(type != Generalroads);  // 为普通时时返回0 否则1
+        }
+    }
+}
+
 QJsonObject Edge::toJsonObject()
 {
     QJsonObject obj;

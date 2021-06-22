@@ -141,6 +141,16 @@ Edge* Node::getLinkedEdge(Node* node)
     return Edge::getByID(edgeId);
 }
 
+QVector<Node*> Node::getRelationNodes()
+{
+    QVector<Node*> nodes;
+    auto           neighs = neighbours.keys();
+    foreach (auto id, neighs) {
+        nodes.push_back(Node::getByID(id));
+    }
+    return nodes;
+}
+
 Node* Node::getByID(unsigned int id)
 {
     if (idMap.contains(id))

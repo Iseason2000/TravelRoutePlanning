@@ -42,6 +42,7 @@ public:  //函数
     void                  unlinkWith(Node* node);              //取消与点的链接
     bool                  hasNeighbour();                      //是否有相连点
     Edge*                 getLinkedEdge(Node* node);           //获取相连节点对应的边，没有相连返回nullptr
+    QVector<Node*>        getRelationNodes();                  //获取相连的点
     QJsonObject           toJsonObject();                      //转化为Json对象,序列化
     static Node*          fromJsonObject(QJsonObject object);  //由json对象创建对象，反序列化
     static QVector<Node*> getNodes();                          //获取所有的已注册节点

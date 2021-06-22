@@ -122,12 +122,15 @@ void GraphicsView::hightLightPath(bool isHightLight)
     auto size = currentResult->size();
     if (size < 2)
         return;
-    qDebug() << size;
-    for (int n = 0; n < size; n++) {
+    for (int n = 0; n < size - 1; n++) {
         auto node1       = currentResult->at(n);
-        auto node2       = currentResult->at(n) + 1;
+        auto node2       = currentResult->at(n + 1);
         auto edge        = node1->getLinkedEdge(node2);
         edge->isLighting = isHightLight;
+        qDebug() << edge->isLighting;
+    }
+    if (!isHightLight) {
+        delete currentResult;
     }
 }
 
