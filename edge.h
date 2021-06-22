@@ -5,7 +5,6 @@
 #include <QMap>
 #include <QPen>
 #include <QString>
-#include <QtDebug>
 //道路
 class Edge : public QGraphicsLineItem
 {

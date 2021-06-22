@@ -117,28 +117,31 @@ void GraphicsView::unlink(Node* fistNode, Node* secondNode)
 
 void GraphicsView::hightLightPath(bool isHightLight)
 {
-    if (!currentResult || currentResult->isEmpty())
+    if (!currentResult1 || currentResult1->isEmpty())
         return;
-    auto size = currentResult->size();
+    auto size = currentResult1->size();
     if (size < 2)
         return;
     for (int n = 0; n < size - 1; n++) {
-        auto node1       = currentResult->at(n);
-        auto node2       = currentResult->at(n + 1);
+        auto node1       = currentResult1->at(n);
+        auto node2       = currentResult1->at(n + 1);
         auto edge        = node1->getLinkedEdge(node2);
         edge->isLighting = isHightLight;
     }
     if (!isHightLight) {
-        delete currentResult;
+        delete currentResult1;
     }
 }
 
 void GraphicsView::hightLightNode(bool isHightLight)
 {
-    if (!currentResult || currentResult->isEmpty())
+    if (!currentResult2 || currentResult2->isEmpty())
         return;
-    for (auto node : *currentResult) {
+    foreach (auto node, *currentResult2) {
         node->isMarked = isHightLight;
+    }
+    if (!isHightLight) {
+        delete currentResult2;
     }
 }
 

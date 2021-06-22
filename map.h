@@ -28,18 +28,20 @@ public:
 
     };
     Map(unsigned int x, unsigned int y, QGraphicsView* graphicsView);
-    void           initMap();                                                                //初始化地图
-    QVector<Node*> PathSearch(Node* start, Node* end, PathSearchType type, bool isWalking);  //求两点最短路径，返回节点列表
-    QVector<Node*> roundSearch(Node* center, unsigned int radius, RoundSearchType type, bool isNearest,
-                               bool isBestScore);  //范围搜索,默认按评价高低排序，返回节点列表
-
-    unsigned int getX() const;
-    unsigned int getY() const;
+    void            initMap();                                                                //初始化地图
+    QVector<Node*>* PathSearch(Node* start, Node* end, PathSearchType type, bool isWalking);  //求两点最短路径，返回节点列表
+    QVector<Node*>* roundSearch(Node* center, unsigned int radius, RoundSearchType type, bool isNearest,
+                                bool isBestScore);                                 //范围搜索,默认按评价高低排序，返回节点列表
+    bool            getPaths(Node* cNode, Node* pNode, Node* sNode, Node* eNode);  //获取2点之间的所有路径
+    unsigned int    getX() const;
+    unsigned int    getY() const;
 
 private:
-    unsigned int   x;                       //地图x尺寸
-    unsigned int   y;                       //地图y尺寸
-    QGraphicsView* graphicsView = nullptr;  //储存地图显示对象
+    QVector<Node*>*           path  = nullptr;         //用于存储临时路径
+    QVector<QVector<Node*>*>* paths = nullptr;         //用于临时储存所有路径集合
+    unsigned int              x;                       //地图x尺寸
+    unsigned int              y;                       //地图y尺寸
+    QGraphicsView*            graphicsView = nullptr;  //储存地图显示对象
 };
 
 #endif  // MAP_H

@@ -5,7 +5,6 @@
 #include <QMainWindow>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QtDebug>
 #include "node.h"
 #include "ui_trpmainwindow.h"
 class GraphicsView : public QGraphicsView
@@ -27,10 +26,11 @@ public:
     Node* mark2 = nullptr;
 
 public:
-    bool            isLinking     = false;    //是否正在链接点
-    bool            isMark1       = false;    //标记点1
-    bool            isMark2       = false;    //标记点2
-    QVector<Node*>* currentResult = nullptr;  //储存当前结果
+    bool            isLinking      = false;    //是否正在链接点
+    bool            isMark1        = false;    //标记点1
+    bool            isMark2        = false;    //标记点2
+    QVector<Node*>* currentResult1 = nullptr;  //储存当前结果1
+    QVector<Node*>* currentResult2 = nullptr;  //储存当前结果2
 
 protected:
     void wheelEvent(QWheelEvent* event);

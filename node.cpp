@@ -41,7 +41,6 @@ Node::Node(QString displayName, NodeType type, unsigned int x, unsigned int y, u
     this->isEmpty     = false;
     if (idMap.contains(id)) {
         QMessageBox::warning(NULL, "错误", "对象id冲突!请检查id唯一性", QMessageBox::Yes, QMessageBox::Yes);
-        //        throw "对象id冲突!";
     }
     this->id = id;
     idMap.insert(id, this);

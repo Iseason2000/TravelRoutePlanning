@@ -5,7 +5,6 @@
 #include <QJsonDocument>
 #include <QMessageBox>
 #include <QRandomGenerator>
-#include <QtDebug>
 #include "ui_trpmainwindow.h"
 TRPMainWindow::TRPMainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::TRPMainWindow)
 {
@@ -48,7 +47,6 @@ void TRPMainWindow::newMap()
     map->initMap();
     Node::reSet();
     Edge::reSet();
-    qDebug() << Node::getIdMap();
 }
 
 void TRPMainWindow::saveMap()
@@ -156,7 +154,7 @@ void TRPMainWindow::login()
     if (!ok || size.isEmpty()) {
         return;
     }
-    if (size != "3119000108") {
+    if (size != "081395") {
         QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("密码错误！"), QMessageBox::Yes, QMessageBox::Yes);
         return;
     } else {
@@ -174,7 +172,7 @@ void TRPMainWindow::on_nodeAblecheckBox_stateChanged(int arg1)
         if (!view->hasCurrentItem())
             return;
         if (view->getCurrentNode()->hasNeighbour()) {
-            QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), ("请先删除该点链接的边!"), QMessageBox::Yes, QMessageBox::Yes);
+            QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先删除该点链接的边!"), QMessageBox::Yes, QMessageBox::Yes);
             ui->nodeAblecheckBox->setChecked(true);
             return;
         }
@@ -198,10 +196,10 @@ void TRPMainWindow::on_nodeAblecheckBox_stateChanged(int arg1)
 
 void TRPMainWindow::on_nodeSaveButton_clicked()
 {
-    //    if (!isLogin) {
-    //        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
-    //        return;
-    //    }
+    if (!isLogin) {
+        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        return;
+    }
     if (!view->hasCurrentItem())
         return;
     view->getCurrentNode()->displayName     = ui->nameEdit->text();
@@ -214,19 +212,19 @@ void TRPMainWindow::on_nodeSaveButton_clicked()
 
 void TRPMainWindow::on_addEdgeButton_clicked()
 {
-    //    if (!isLogin) {
-    //        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
-    //        return;
-    //    }
+    if (!isLogin) {
+        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        return;
+    }
     view->isLinking = true;
 }
 
 void TRPMainWindow::on_removeEdgeButton_2_clicked()
 {
-    //    if (!isLogin) {
-    //        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
-    //        return;
-    //    }
+    if (!isLogin) {
+        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        return;
+    }
     if (ui->linkedcomboBox->count() <= 0)
         return;
     auto secondNode = Node::getByName(ui->linkedcomboBox->currentText());
@@ -251,10 +249,10 @@ void TRPMainWindow::on_linkedcomboBox_currentIndexChanged(const QString& arg1)
 
 void TRPMainWindow::on_edgeSaveButton_clicked()
 {
-    //    if (!isLogin) {
-    //        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
-    //        return;
-    //    }
+    if (!isLogin) {
+        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        return;
+    }
     auto name = ui->linkedcomboBox->currentText();
     if (name.isEmpty())
         return;
@@ -297,9 +295,14 @@ void TRPMainWindow::on_pushButton_clicked()
     if (moveType == 0 && pathSearchType > 3) {
         QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("步行方式不支持该查询范围！"), QMessageBox::Yes, QMessageBox::Yes);
     }
+    view->hightLightNode(false);
     view->hightLightPath(false);
-    auto result         = map->PathSearch(view->mark1, view->mark2, pathSearchType, !moveType);
-    view->currentResult = result;
+    auto result          = map->PathSearch(view->mark1, view->mark2, pathSearchType, !moveType);
+    view->currentResult1 = result;
+    if (!result || result->isEmpty()) {
+        QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("起点与终点未链接！"), QString::fromLocal8Bit("确定"));
+        return;
+    }
     view->hightLightPath(true);
     view->viewport()->update();
 }
@@ -329,9 +332,15 @@ void TRPMainWindow::on_pushButton_2_clicked()
         isNearest   = false;
     }
     auto result = map->roundSearch(view->mark1, radius, nodeType, isNearest, isBestScore);
+    view->hightLightPath(false);
     view->hightLightNode(false);
-    view->currentResult = &result;
+    view->currentResult2 = result;
+    if (!result || result->isEmpty()) {
+        QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("没有搜索结果！"), QString::fromLocal8Bit("确定"));
+        return;
+    }
     view->hightLightNode(true);
+    view->viewport()->update();
 }
 
 void TRPMainWindow::on_checkBox_stateChanged(int arg1)
@@ -353,4 +362,5 @@ void TRPMainWindow::on_randomButton_clicked()
     foreach (auto edge, edges) {
         edge->congestion = QRandomGenerator::global()->bounded(1.0);
     }
+    view->viewport()->update();
 }

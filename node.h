@@ -4,8 +4,6 @@
 #include <QJsonObject>
 #include <QMap>
 #include <QPainter>
-#include <QString>
-#include <QtDebug>
 #include "edge.h"
 
 class Node : public QGraphicsItem  //节点类

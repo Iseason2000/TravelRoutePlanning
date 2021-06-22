@@ -3,7 +3,7 @@
 QMap<unsigned int, Edge*> Edge::idMap         = QMap<unsigned int, Edge*>();  //初始化id表
 QPen                      Edge::normalLinePen = QPen(QColor(50, 200, 100), 4);
 QPen                      Edge::highLinePen   = QPen(QColor(50, 100, 250), 4);
-QPen                      Edge::lightLinePen  = QPen(QColor(250, 50, 100), 5);
+QPen                      Edge::lightLinePen  = QPen(QColor(250, 50, 100), 6);
 
 Edge::~Edge()
 {
@@ -53,7 +53,7 @@ float Edge::getWeight(int searchType, bool isWalking)
             } else {
                 float speed;
                 if (congestion <= 0)
-                    congestion = 0.05;
+                    congestion = 0.05F;
                 if (type == Highways) {
                     speed = 120 * congestion;
                 } else {
@@ -142,11 +142,15 @@ void Edge::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
     if (isLighting)
         setPen(Edge::lightLinePen);
     else {
+        QPen pen;
         if (type == Highways) {
-            setPen(Edge::highLinePen);
+            pen = Edge::highLinePen;
         } else {
-            setPen(Edge::normalLinePen);
+            pen = Edge::normalLinePen;
         }
+        auto   color = pen.color();
+        QColor c     = QColor(color.red() + 150 * (1 - congestion), color.green(), color.blue());
+        setPen(QPen(c, 5));
     }
     setLine(line);
     QGraphicsLineItem::paint(painter, option, widget);
