@@ -51,6 +51,8 @@ void TRPMainWindow::newMap()
 
 void TRPMainWindow::saveMap()
 {
+    if (!map || !view)
+        return;
     QJsonObject mapJson;
     mapJson["mapSize"] = QString::number(map->getX()).append(",").append(QString::number(map->getY()));
     auto       nodes   = Node::getIdMap().values();
@@ -313,7 +315,10 @@ void TRPMainWindow::on_setStartButton_area_clicked()
     if (view->mark1) {
         view->mark1->isMarked = false;
     }
-    view->mark1 = nullptr;
+    if (view->mark2) {
+        view->mark2->isMarked = false;
+    }
+    view->mark2 = nullptr;
 }
 
 void TRPMainWindow::on_pushButton_2_clicked()

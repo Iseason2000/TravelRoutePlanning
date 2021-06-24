@@ -1,4 +1,5 @@
 ﻿#include "graphicsview.h"
+#include <QDebug>
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent)
 {
     resize(800, 800);
@@ -130,6 +131,7 @@ void GraphicsView::hightLightPath(bool isHightLight)
     }
     if (!isHightLight) {
         delete currentResult1;
+        currentResult1 = nullptr;
     }
 }
 
@@ -142,6 +144,7 @@ void GraphicsView::hightLightNode(bool isHightLight)
     }
     if (!isHightLight) {
         delete currentResult2;
+        currentResult2 = nullptr;
     }
 }
 
@@ -154,7 +157,7 @@ void GraphicsView::wheelEvent(QWheelEvent* event)
 void GraphicsView::mouseMoveEvent(QMouseEvent* event)
 {
     if (isMoving) {
-        centerOn(event->pos());
+        centerOn(mapToScene(event->pos()));
     }
 }
 

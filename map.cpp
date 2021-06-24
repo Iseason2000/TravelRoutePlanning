@@ -126,7 +126,7 @@ QVector<Node*>* Map::roundSearch(Node* center, unsigned int radius, RoundSearchT
             break;
         }
         case RoundSearchType::Food: {
-            keyWord = QString::fromLocal8Bit("食物");
+            keyWord = QString::fromLocal8Bit("美食");
             break;
         }
         case RoundSearchType::Other: {
