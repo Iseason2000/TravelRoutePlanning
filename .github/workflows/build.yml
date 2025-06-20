@@ -17,8 +17,6 @@ jobs:
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
             qt_arch_install: msvc2019_64          
-    env:
-      targetName: Build.exe
     # 步骤
     steps:
       # 安装Qt
@@ -49,4 +47,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Upload
-          path: ./*
+          path: release/*
