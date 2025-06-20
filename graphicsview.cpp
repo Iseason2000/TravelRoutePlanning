@@ -54,7 +54,7 @@ void GraphicsView::showAttribute()
 
 void GraphicsView::newNode()
 {
-    auto newNode = new Node(QString::fromLocal8Bit("新节点"), Node::NodeType::Mid, currentNode->x, currentNode->y);
+    auto newNode = new Node(QString::fromUtf8("新节点"), Node::NodeType::Mid, currentNode->x, currentNode->y);
     newNode->displayName += QString::number(newNode->getId());
     auto pos = currentNode->pos();
     scene()->removeItem(currentNode);
@@ -96,7 +96,7 @@ void GraphicsView::link(Node* fistNode, Node* secondNode, Edge* edge)
 
 void GraphicsView::link(Node* fistNode, Node* secondNode)
 {
-    Edge* edge = new Edge(QString::fromLocal8Bit("新道路"), Edge::EdgeType::Generalroads, 100, 10);
+    Edge* edge = new Edge(QString::fromUtf8("新道路"), Edge::EdgeType::Generalroads, 100, 10);
     link(fistNode, secondNode, edge);
 }
 

@@ -110,27 +110,27 @@ QVector<Node*>* Map::roundSearch(Node* center, unsigned int radius, RoundSearchT
     QString keyWord;
     switch (type) {
         case RoundSearchType::Hotel: {
-            keyWord = QString::fromLocal8Bit("酒店");
+            keyWord = QString::fromUtf8("酒店");
             break;
         }
         case RoundSearchType::Supermarket: {
-            keyWord = QString::fromLocal8Bit("超市");
+            keyWord = QString::fromUtf8("超市");
             break;
         }
         case RoundSearchType::Bank: {
-            keyWord = QString::fromLocal8Bit("银行");
+            keyWord = QString::fromUtf8("银行");
             break;
         }
         case RoundSearchType::Attraction: {
-            keyWord = QString::fromLocal8Bit("景点");
+            keyWord = QString::fromUtf8("景点");
             break;
         }
         case RoundSearchType::Food: {
-            keyWord = QString::fromLocal8Bit("美食");
+            keyWord = QString::fromUtf8("美食");
             break;
         }
         case RoundSearchType::Other: {
-            keyWord = QString::fromLocal8Bit("其他");
+            keyWord = QString::fromUtf8("其他");
             break;
         }
     }

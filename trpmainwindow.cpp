@@ -26,7 +26,7 @@ TRPMainWindow::~TRPMainWindow()
 void TRPMainWindow::newMap()
 {
     bool    ok;
-    QString size = QInputDialog::getText(this, QString::fromLocal8Bit("新建地图"), QString::fromLocal8Bit("请大图大小：x,y"), QLineEdit::Normal, 0, &ok);
+    QString size = QInputDialog::getText(this, QString::fromUtf8("新建地图"), QString::fromUtf8("请大图大小：x,y"), QLineEdit::Normal, 0, &ok);
     if (!ok || size.isEmpty()) {
         return;
     }
@@ -70,32 +70,32 @@ void TRPMainWindow::saveMap()
     QJsonDocument document;
     document.setObject(mapJson);
     auto    json    = document.toJson();
-    QString strPath = QFileDialog::getSaveFileName(this, QString::fromLocal8Bit("选择保存路径"), "default", tr("Json File(*.json)"));
+    QString strPath = QFileDialog::getSaveFileName(this, QString::fromUtf8("选择保存路径"), "default", tr("Json File(*.json)"));
     if (strPath == "") {
         return;
     }
     QFile filename(strPath);
     if (!filename.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QMessageBox::warning(this, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("保存文件失败"), QMessageBox::Ok);
+        QMessageBox::warning(this, QString::fromUtf8("错误"), QString::fromUtf8("保存文件失败"), QMessageBox::Ok);
         return;
     } else {
         filename.write(json);
     }
-    QMessageBox::information(this, QString::fromLocal8Bit("保存文件"), QString::fromLocal8Bit("保存文件成功!"), QMessageBox::Ok);
+    QMessageBox::information(this, QString::fromUtf8("保存文件"), QString::fromUtf8("保存文件成功!"), QMessageBox::Ok);
     filename.close();
 }
 
 void TRPMainWindow::openMap()
 {
-    QString strPath = QFileDialog::getOpenFileName(NULL, QString::fromLocal8Bit("选择地图文件"), "", QObject::tr("Json File(*.json)"));
+    QString strPath = QFileDialog::getOpenFileName(NULL, QString::fromUtf8("选择地图文件"), "", QObject::tr("Json File(*.json)"));
     if (strPath == "") {
-        QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("选择文件失败，无路径"), "OK");
+        QMessageBox::information(this, QString::fromUtf8("提示"), QString::fromUtf8("选择文件失败，无路径"), "OK");
         return;  //用户点击的取消按钮
     }
     QFile      file(strPath);
     QByteArray json;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QMessageBox::warning(this, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("打开文件失败!"), QMessageBox::Ok);
+        QMessageBox::warning(this, QString::fromUtf8("错误"), QString::fromUtf8("打开文件失败!"), QMessageBox::Ok);
         return;
     } else {
         json = file.readAll();
@@ -152,15 +152,15 @@ void TRPMainWindow::openMap()
 void TRPMainWindow::login()
 {
     bool    ok;
-    QString size = QInputDialog::getText(this, QString::fromLocal8Bit("登录到后台"), QString::fromLocal8Bit("请输入密码"), QLineEdit::Normal, 0, &ok);
+    QString size = QInputDialog::getText(this, QString::fromUtf8("登录到后台"), QString::fromUtf8("请输入密码"), QLineEdit::Normal, 0, &ok);
     if (!ok || size.isEmpty()) {
         return;
     }
     if (size != "081395") {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("密码错误！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("密码错误！"), QMessageBox::Yes, QMessageBox::Yes);
         return;
     } else {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("成功"), QString::fromLocal8Bit("登录成功！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("成功"), QString::fromUtf8("登录成功！"), QMessageBox::Yes, QMessageBox::Yes);
         isLogin = true;
         ui->nodeAblecheckBox->setDisabled(false);
     }
@@ -174,7 +174,7 @@ void TRPMainWindow::on_nodeAblecheckBox_stateChanged(int arg1)
         if (!view->hasCurrentItem())
             return;
         if (view->getCurrentNode()->hasNeighbour()) {
-            QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先删除该点链接的边!"), QMessageBox::Yes, QMessageBox::Yes);
+            QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先删除该点链接的边!"), QMessageBox::Yes, QMessageBox::Yes);
             ui->nodeAblecheckBox->setChecked(true);
             return;
         }
@@ -184,7 +184,7 @@ void TRPMainWindow::on_nodeAblecheckBox_stateChanged(int arg1)
 
     } else if (!view->hasCurrentItem()) {
         ui->nodeAblecheckBox->setChecked(false);
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先选择一个空节点!"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先选择一个空节点!"), QMessageBox::Yes, QMessageBox::Yes);
     } else {
         ui->nodeAttribute->setDisabled(false);
         ui->linkedNode->setDisabled(false);
@@ -199,7 +199,7 @@ void TRPMainWindow::on_nodeAblecheckBox_stateChanged(int arg1)
 void TRPMainWindow::on_nodeSaveButton_clicked()
 {
     if (!isLogin) {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
         return;
     }
     if (!view->hasCurrentItem())
@@ -215,7 +215,7 @@ void TRPMainWindow::on_nodeSaveButton_clicked()
 void TRPMainWindow::on_addEdgeButton_clicked()
 {
     if (!isLogin) {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
         return;
     }
     view->isLinking = true;
@@ -224,7 +224,7 @@ void TRPMainWindow::on_addEdgeButton_clicked()
 void TRPMainWindow::on_removeEdgeButton_2_clicked()
 {
     if (!isLogin) {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
         return;
     }
     if (ui->linkedcomboBox->count() <= 0)
@@ -252,7 +252,7 @@ void TRPMainWindow::on_linkedcomboBox_currentIndexChanged(const QString& arg1)
 void TRPMainWindow::on_edgeSaveButton_clicked()
 {
     if (!isLogin) {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先登录到后台！"), QMessageBox::Yes, QMessageBox::Yes);
         return;
     }
     auto name = ui->linkedcomboBox->currentText();
@@ -293,16 +293,16 @@ void TRPMainWindow::on_pushButton_clicked()
     auto pathSearchType = Map::PathSearchType(ui->searchTypecomboBox->currentIndex());
     auto moveType       = ui->walkTypecomboBox->currentIndex();
     if (!view->mark1 || !view->mark2)
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先设置出点和入点！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先设置出点和入点！"), QMessageBox::Yes, QMessageBox::Yes);
     if (moveType == 0 && pathSearchType > 3) {
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("步行方式不支持该查询范围！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("步行方式不支持该查询范围！"), QMessageBox::Yes, QMessageBox::Yes);
     }
     view->hightLightNode(false);
     view->hightLightPath(false);
     auto result          = map->PathSearch(view->mark1, view->mark2, pathSearchType, !moveType);
     view->currentResult1 = result;
     if (!result || result->isEmpty()) {
-        QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("起点与终点未链接！"), QString::fromLocal8Bit("确定"));
+        QMessageBox::information(this, QString::fromUtf8("提示"), QString::fromUtf8("起点与终点未链接！"), QString::fromUtf8("确定"));
         return;
     }
     view->hightLightPath(true);
@@ -324,7 +324,7 @@ void TRPMainWindow::on_setStartButton_area_clicked()
 void TRPMainWindow::on_pushButton_2_clicked()
 {
     if (!view->mark1)
-        QMessageBox::warning(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("请先设置搜索中点！"), QMessageBox::Yes, QMessageBox::Yes);
+        QMessageBox::warning(NULL, QString::fromUtf8("错误"), QString::fromUtf8("请先设置搜索中点！"), QMessageBox::Yes, QMessageBox::Yes);
     auto radius = ui->areaBox->value();
     if (radius < 1)
         return;
@@ -341,7 +341,7 @@ void TRPMainWindow::on_pushButton_2_clicked()
     view->hightLightNode(false);
     view->currentResult2 = result;
     if (!result || result->isEmpty()) {
-        QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("没有搜索结果！"), QString::fromLocal8Bit("确定"));
+        QMessageBox::information(this, QString::fromUtf8("提示"), QString::fromUtf8("没有搜索结果！"), QString::fromUtf8("确定"));
         return;
     }
     view->hightLightNode(true);
